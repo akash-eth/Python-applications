@@ -1,2 +1,2 @@
 # Python-applications
-basic projects in python
+Basic python applications developed over jupyter-notebook.
