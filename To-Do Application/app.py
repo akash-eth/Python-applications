@@ -30,13 +30,33 @@ def parse(command):
 def main():
     print("!! Starting the Apllication please hold tight !!")
     while True:
-        command = input("$ ").lower()
-        if (command == "quit"):
-            time.sleep(2)
-            print("!! Exiting out the apllication !!")
+        # take the command as input from the user
+        command = input('$ ')
+        command_name, command_args = parse(command)
+        # print(command_name, command_args)
+        if (command_name == 'quit'):
             break
+        elif (command_name == 'help'):
+            with open('help.txt', 'r') as help_file:
+                print(help_file.read())
+        elif (command_name == 'invalid'):
+            print('Please enter a valid command, use help command to display all!')
+        elif (command_name == 'use'):
+            file_name = commands_dict[command_name](command_args)
+            if (file_name == -1):
+                print('This is not a valid list name!')
+                current_list = ''
+            else:
+                print('Successfuly chosen this list...')
+                current_list = file_name
+        elif (command.split()[0] == 'todo'):
+            # todo type of command
+            command_args.insert(0, current_list)
+            commands_dict[command_name](command_args)
         else:
-            continue
+            commands_dict[command_name](command_args)
+
+            
 
 
 if __name__ == '__main__':
